@@ -19,3 +19,4 @@ async def create_user(
     await db.commit()
     await db.refresh(user)
     return user
+

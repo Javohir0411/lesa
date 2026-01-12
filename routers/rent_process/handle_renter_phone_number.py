@@ -26,3 +26,18 @@ async def handle_rent_phone_number(message: types.Message, state: FSMContext):
         text=text,
         reply_markup=types.ReplyKeyboardRemove(),
     )
+
+
+@router.message(RentStatus.renter_phone_number)
+async def handle_invalid_phone_number(message: types.Message):
+    lang = await get_user_language(message)
+    if lang == "uzl":
+        text = "Telefon raqamni +998********* formatda kiritng"
+    elif lang == "uzk":
+        text = "Телефон рақамни +998********* форматда киритнг"
+    elif lang == "rus":
+        text = "Введите номер телефона в формате +998*********"
+    await message.answer(
+        text=text,
+        reply_markup=types.ReplyKeyboardRemove(),
+    )

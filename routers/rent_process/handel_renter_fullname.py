@@ -11,7 +11,7 @@ from states import RentStatus
 router = Router(name=__name__)
 
 
-@router.message(F.text, RentStatus.renter_fullname)
+@router.message(F.text.regexp(r"^[a-zA-Zа-яА-ЯёЁ\s]+$"), RentStatus.renter_fullname)
 async def handle_renter_fullname(message: types.Message, state: FSMContext):
     renter_fullname = message.text
 
@@ -26,6 +26,15 @@ async def handle_renter_fullname(message: types.Message, state: FSMContext):
     text = RenterInfo.RENTER_PHONE_NUMBER[lang]
 
     await state.set_state(RentStatus.renter_phone_number)
+    await message.answer(
+        text=text,
+        reply_markup=ReplyKeyboardRemove()
+    )
+
+@router.message(RentStatus.renter_fullname)
+async def handel_invalid_fullname(message: types.Message):
+    lang = await get_user_language(message)
+    text = RenterInfo.INVALID_RENTER_FULLNAME[lang]
     await message.answer(
         text=text,
         reply_markup=ReplyKeyboardRemove()

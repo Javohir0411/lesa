@@ -11,6 +11,12 @@ class RenterInfo:
         "rus": "Введите паспортные данные арендатора <b>(AC1234567)</b>: ",
     }
 
+    INVALID_RENTER_FULLNAME = {
+        "uzl": "Ism va familiyani matn ko'rinishida kiritng",
+        "uzk": "Исм ва фамилияни матн кўринишида киритнг",
+        "rus": "Введите ваше имя и фамилию в текстовом формате.",
+    }
+
     HOZIRCHA = {
         "uzl": "Bot, hozircha shu jarayongacha yozildi.\n"
                "Hali yana texnik jarayonlar olib borilmoqda.\n"

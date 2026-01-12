@@ -5,7 +5,7 @@ from aiogram.fsm.context import FSMContext
 
 from bot_strings.rent_command_strings import RentStrings
 from database.session import get_user_language
-from keyboards.common_keyboards import build_location_type_kb
+# from keyboards.common_keyboards import build_location_type_kb
 from states import RentStatus
 import logging
 
@@ -39,9 +39,9 @@ async def handle_rent_end_date(message: types.Message, state: FSMContext):
     logging.info(f"END DATE QO'SHILDI: {data}")
     logging.info(f"END DATE QO'SHILDI: {data['end_date']}")
     lang = await get_user_language(message)
-    text = RentStrings.ASK_LOCATION_TYPE[lang]
-    await state.set_state(RentStatus.location_type)
+    text = RentStrings.LOCATION_REQUEST[lang]
+    await state.set_state(RentStatus.location_request)
     await message.answer(
         text=text,
-        reply_markup=build_location_type_kb(lang)
+        # reply_markup=build_location_type_kb(lang)
     )

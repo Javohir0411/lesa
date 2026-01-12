@@ -1,4 +1,4 @@
-from utils.enums import LanguageEnum, ProductTypeEnum, LesaSizeEnum, LocationTypeEnum
+from utils.enums import LanguageEnum, ProductTypeEnum, LesaSizeEnum
 
 
 class RentStrings:
@@ -129,17 +129,67 @@ class RentStrings:
         "rus": "В каком формате вы отправляете местоположение?",
     }
 
-    LOCATION_KB_TRANSLATION = {
-        "uzl": {
-            LocationTypeEnum.map.name: "Xarita📍",
-            LocationTypeEnum.text.name: "Matn📝",
-        },
-        "uzk": {
-            LocationTypeEnum.map.name: "Харита📍",
-            LocationTypeEnum.text.name: "Матн📝",
-        },
-        "rus": {
-            LocationTypeEnum.map.name: "Карта📍",
-            LocationTypeEnum.text.name: "Текст📝",
-        },
+    LOCATION_INVALID = {
+        "uzl": "Joylashuvni yuborish turini tugmalar orqali belgilang⬇️",
+        "uzk": "Жойлашувни юбориш турини тугмалар орқали белгиланг⬇️",
+        "rus": "Укажите тип отправки по местоположению с помощью кнопок.⬇️",
+    }
+
+    # LOCATION_KB_TRANSLATION = {
+    #     "uzl": {
+    #         LocationTypeEnum.map.name: "Xarita📍",
+    #         LocationTypeEnum.text.name: "Matn📝",
+    #     },
+    #     "uzk": {
+    #         LocationTypeEnum.map.name: "Харита📍",
+    #         LocationTypeEnum.text.name: "Матн📝",
+    #     },
+    #     "rus": {
+    #         LocationTypeEnum.map.name: "Карта📍",
+    #         LocationTypeEnum.text.name: "Текст📝",
+    #     },
+    # }
+
+    LOCATION_REQUEST = {
+        "uzl": "Mijozning joylashuvini yuboring📍 ",
+        "uzk": "Мижознинг жойлашувини юборинг📍 ",
+        "rus": "Отправить местоположение клиента📍 ",
+    }
+
+    SENT_LOCATION_INFO = {
+        "uzl":
+            "📍<b>Lokatsiya qabul qilindi</b>\n\n"
+            "<b>Latitude</b>: <u>{renter_latitude}</u>\n"
+            "<b>Longitude</b>: <u>{renter_longitude}</u>\n"
+            "<b>Masofa</b>: <u>{distance_km}</u> km\n\n"
+            "<b>Yetkazib berish narxi</b>:\n"
+            "<b>2.5 km radius uchun: </b>\n"
+                "<b>Yetkazib berish:</b> <u>30.000</u> so'm\n"
+                "<b>Qayta olib kelish:</b> <u>30.000</u> so'm\n"
+                "<b>Umumiy:</b> <u>60.000</u> so'm\n\n"
+            "<b>Kiritilgan joylashuv uchun</b>: <u>{price_delivery}</u> so'm",
+
+        "uzk":
+            "<b>📍Локация қабул қилинди</b>\n\n"
+            "<b>Латитуде</b>: <u>{renter_latitude}</u>\n"
+            "<b>Лонгитуде</b>: <u>{renter_longitude}</u>\n"
+            "<b>Масофа</b>: <u>{distance_km}</u> км\n\n"
+            "<b>Етказиб бериш нархи</b>:\n"
+            "<b>2.5 км радиус учун: </b>\n"
+                "<b>Етказиб бериш:</b> <u>30.000</u> сўм\n"
+                "<b>Қайта олиб келиш:</b> <u>30.000</u> сўм\n"
+                "<b>Умумий:</b> <u>60.000</u> сўм\n\n"
+            "<b>Киритилган жойлашув учун</b>: <u>{price_delivery}</u> сўм",
+
+        "rus":
+            "📍<b>Принятое местоположение</b>\n\n"
+            "<b>Широта</b>: <u>{renter_latitude}</u>\n"
+            "<b>Долгота</b>: <u>{renter_longitude}</u>\n"
+            "<b>Расстояние</b>: <u>{distance_km}</u> км\n\n"
+            "<b>Стоимость доставки</b>:\n"
+            "<b>В радиусе 2,5 км:</b>\n"
+                "<b>Доставка:</b> <u>30 000</u> сумов\n"
+                "<b>Возврат:</b> <u>30 000</u> сумов\n"
+                "<b>Итого:</b> <u>60 000</u> сумов\n\n"
+            "<b>Для указанного местоположения: <u>{price_delivery}</u> сум",
     }

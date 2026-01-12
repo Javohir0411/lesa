@@ -30,9 +30,9 @@ class PaymentStatusEnum(StrEnum):
     not_paid = "Тўланмаган ❌"
 
 
-class LocationTypeEnum(StrEnum):
-    map = "Харита",
-    text = "Матн"
+# class LocationTypeEnum(StrEnum):
+#     map = "Харита",
+#     # text = "Матн"
 
 
 """

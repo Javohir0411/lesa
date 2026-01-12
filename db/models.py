@@ -26,8 +26,8 @@ class User(Base):
     user_fullname = Column(String, nullable=False)
     user_phone_number = Column(String, unique=True, nullable=False)
     selected_language = Column(String, nullable=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())  # Avtomatik kiritish vaqtini saqlash
-    updated_at = Column(DateTime(timezone=True), server_default=func.now(),
+    created_at = Column(Date, server_default=func.current_date())  # Avtomatik kiritish vaqtini saqlash
+    updated_at = Column(Date, server_default=func.current_date(),
                         onupdate=func.now())  # Yangilangan vaqtini avtomatik saqlash
 
 
@@ -75,3 +75,7 @@ class Rent(Base):
 
     renter = relationship("Renter", back_populates="rents")
     product = relationship("Product", back_populates="rents")
+
+    created_at = Column(Date, server_default=func.current_date())  # Avtomatik kiritish vaqtini saqlash
+    updated_at = Column(Date, server_default=func.current_date(),
+                        onupdate=func.now())  # Yangilangan vaqtini avtomatik saqlash

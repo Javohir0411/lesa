@@ -9,7 +9,7 @@ class Register(StatesGroup):
 
 class RentStatus(StatesGroup):
     product_choice = State()
-    lese_size_choice = State()
+    lesa_size_choice = State()
     quantity = State()
     additional_choice = State()
     renter_fullname = State()
@@ -17,7 +17,9 @@ class RentStatus(StatesGroup):
     renter_passport_info = State()
     start_date = State()
     end_date = State()
-    location = State()
+    location_type = State()
+    location_request = State()
+    location_text = State()
     delivery_needed = State()
     delivery_price = State()
     notes = State()

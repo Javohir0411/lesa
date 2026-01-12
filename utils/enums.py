@@ -14,20 +14,26 @@ class ProductTypeEnum(StrEnum):
 
 
 class LesaSizeEnum(StrEnum):
-    katta = "Катта"
-    orta = "Ўрта"
-    kichik = "Кичик"
-    none = "None"
+    katta = "katta"
+    orta = "orta"
+    kichik = "kichik"
 
 
 class RentStatusEnum(StrEnum):
     active = "Ижарада"
     returned = "Қайтарилган"
 
+
 class PaymentStatusEnum(StrEnum):
     full_paid = "Тўлиқ ✅"
     part_paid = "Қисман ⚠️"
     not_paid = "Тўланмаган ❌"
+
+
+class LocationTypeEnum(StrEnum):
+    map = "Харита",
+    text = "Матн"
+
 
 """
 CREATE TYPE ProductTypeEnum AS ENUM ('lesa', 'monolit', 'taxta');

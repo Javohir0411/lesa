@@ -22,25 +22,3 @@ class ProductStrings:
         }
     }
 
-
-"""
-    PRODUCT_TRANSLATION = {
-        ProductTypeEnum.lesa.name: {
-            LanguageEnum.uzl.name: "Lesa",
-            LanguageEnum.uzk.name: "Леса",
-            LanguageEnum.rus.name: "Леса"
-        },
-
-        ProductTypeEnum.monolit.name: {
-            LanguageEnum.uzl.name: "Monolit stoyka",
-            LanguageEnum.uzk.name: "Монолит стойка",
-            LanguageEnum.rus.name: "Монолитная стойка"
-        },
-
-        ProductTypeEnum.taxta.name: {
-            LanguageEnum.uzl.name: "Taxta",
-            LanguageEnum.uzk.name: "Тахта",
-            LanguageEnum.rus.name: "Доска"
-        },
-    }
-"""

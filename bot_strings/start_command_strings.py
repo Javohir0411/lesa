@@ -38,17 +38,23 @@ class StartStrings:
         LanguageEnum.uzl.name:
             "Ma'lumotlaringiz saqlandi:\n\n"
             "Ismingiz: {user_fullname}\n"
-            "Telefon raqamingiz: {user_phone_number}",
+            "Telefon raqamingiz: {user_phone_number}\n\n"
+        
+            "Xizmatlardan foydalanish va tanishish uchun, botga  /help buyrug'ini berishingiz mumkin!",
 
         LanguageEnum.uzk.name:
             "Маълумотларингиз сақланди:\n\n"
             "Исмингиз: {user_fullname}\n"
-            "Телефон рақамингиз: {user_phone_number}",
+            "Телефон рақамингиз: {user_phone_number}\n\n"
+            
+            "Хизматлардан фойдаланиш ва танишиш учун, ботга  /help буйруғини беришингиз мумкин!",
 
         LanguageEnum.rus.name:
             "Ваши данные сохранены:\n\n"
             "Ваше имя: {user_fullname}\n"
-            "Ваш номер телефона: {user_phone_number}",
+            "Ваш номер телефона: {user_phone_number}\n\n"
+            
+            "Чтобы воспользоваться услугами и узнать о них больше, вы можете отправить боту команду  /help !",
 
     }
 

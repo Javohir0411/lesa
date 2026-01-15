@@ -35,8 +35,8 @@ async def handle_location_request(message: types.Message, state: FSMContext):
     renter_longitude = location.longitude
 
     # 📍 1️⃣ Doimiy nuqta (ombor / baza)
-    base_latitude = 41.387957
-    base_longitude = 69.353383
+    base_latitude = 41.425701
+    base_longitude = 69.343535
 
     distance_km = haversine(
         base_latitude,

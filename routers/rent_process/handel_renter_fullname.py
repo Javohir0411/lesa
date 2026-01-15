@@ -11,7 +11,7 @@ from states import RentStatus
 router = Router(name=__name__)
 
 
-@router.message(F.text.regexp(r"^[a-zA-Zа-яА-ЯёЁ\s]+$"), RentStatus.renter_fullname)
+@router.message(F.text, RentStatus.renter_fullname)
 async def handle_renter_fullname(message: types.Message, state: FSMContext):
     renter_fullname = message.text
 

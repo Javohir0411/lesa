@@ -32,22 +32,20 @@ async def handle_additional_choice_ok(message: types.Message, state: FSMContext)
     await state.set_state(RentStatus.product_choice)
 
     text = RentStrings.CHOOSE_ANOTHER_PRODUCT[lang]
-    for product in available_products:
-        # Lesa mahsulotlarini tilga mos olish
+    for product, remaining_quantity in available_products:
         if product.product_type.name == ProductTypeEnum.lesa.name:
             size_name = product.product_size.name
             product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][ProductTypeEnum.lesa.name][size_name]
         else:
             product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][product.product_type.name]
 
-        # Qoldiqni tilga mos qo‘shish
+        # real-time qoldiqni chiqaramiz
         if lang == "uzl":
-            text += f"<b>{product_name}</b> - Qoldiq: {product.total_quantity}\n"
+            text += f"<b>{product_name}</b> - Qoldiq: {remaining_quantity}\n"
         elif lang == "uzk":
-            text += f"{product_name} - Қолдиқ: {product.total_quantity}\n"
+            text += f"{product_name} - Қолдиқ: {remaining_quantity}\n"
         elif lang == "rus":
-            text += f"{product_name} - Остаток: {product.total_quantity}\n"
-
+            text += f"{product_name} - Остаток: {remaining_quantity}\n"
     logging.info(f"MESSAGE TEXT: {text}")
     data = await state.get_data()
     logging.info(f"DATA: {data}")

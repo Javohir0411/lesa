@@ -65,7 +65,8 @@ class Rent(Base):
     start_date = Column(DateTime(timezone=True), nullable=False)
     end_date = Column(DateTime(timezone=True), nullable=False)
 
-    location = Column(String, nullable=True)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
     delivery_needed = Column(Boolean, nullable=True, default=False)
     delivery_price = Column(Float, nullable=True)
 

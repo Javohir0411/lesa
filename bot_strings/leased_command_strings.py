@@ -6,21 +6,24 @@ class Leased:
     }
 
     RESULT = {
-        "uzl": "\n    🔢Miqdor: {rent.quantity}"
-               "\n    👤Ijarachi: {renter.renter_fullname}"
-               "\n    📞Tel: {renter.renter_phone_number}"
-               "\n    📅{start_date} → {end_date}"
-               "\n    💳To'lov: {rent.status.value}\n\n",
+        "uzl": "\n    🔢 Miqdor: {rent.quantity}"
+               "\n    👤 Ijarachi: {renter.renter_fullname}"
+               "\n    📞 Tel: {renter.renter_phone_number}"
+               "\n    🛂 Passport: {renter.renter_passport_info}"
+               "\n    📅 {start_date} → {end_date}"
+               "\n    💳 To'lov: {rent.status.value}\n\n\n",
 
-        "uzk": "\n    🔢Миқдор: {rent.quantity}"
-               "\n    👤Ижарачи: {renter.renter_fullname}"
-               "\n    📞Тел: {renter.renter_phone_number}"
-               "\n    📅{start_date} → {end_date}"
-               "\n    💳Тўлов: {rent.status.value}\n\n\n",
+        "uzk": "\n    🔢 Миқдор: {rent.quantity}"
+               "\n    👤 Ижарачи: {renter.renter_fullname}"
+               "\n    📞 Тел: {renter.renter_phone_number}"
+               "\n    🛂 Пасспорт: {renter.renter_passport_info}"
+               "\n    📅 {start_date} → {end_date}"
+               "\n    💳 Тўлов: {rent.status.value}\n\n\n",
 
         "rus": "\n    🔢 Количество: {rent.quantity}"
                "\n    👤 Арендатор: {renter.renter_fullname}"
                "\n    📞 Телефон: {renter.renter_phone_number}"
+               "\n    🛂 Пасспорт: {renter.renter_passport_info}"
                "\n    📅 {start_date} → {end_date}"
-               "\n    💳 Оплата: {rent.status.value}\n\n"
+               "\n    💳 Оплата: {rent.status.value}\n\n\n"
     }

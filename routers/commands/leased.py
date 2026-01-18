@@ -74,7 +74,7 @@ RENT_STATUS_LABEL = {
 }
 
 # Pagination
-RENT_PER_PAGE = 5  # har sahifada nechta rent ko‘rsatiladi
+RENT_PER_PAGE = 3  # har sahifada nechta rent ko‘rsatiladi
 
 
 

@@ -26,6 +26,7 @@ class User(Base):
     user_fullname = Column(String, nullable=False)
     user_phone_number = Column(String, unique=True, nullable=False)
     selected_language = Column(String, nullable=False)
+    rents = relationship("Rent", back_populates="user")
     created_at = Column(Date, server_default=func.current_date())  # Avtomatik kiritish vaqtini saqlash
     updated_at = Column(Date, server_default=func.current_date(),
                         onupdate=func.now())  # Yangilangan vaqtini avtomatik saqlash
@@ -58,6 +59,7 @@ class Rent(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)  # yangi field
     renter_id = Column(Integer, ForeignKey("renter.id"), nullable=False)
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
 
@@ -69,11 +71,13 @@ class Rent(Base):
     longitude = Column(Float, nullable=True)
     delivery_needed = Column(Boolean, nullable=True, default=False)
     delivery_price = Column(Float, nullable=True)
-
+    product_price = Column(Float, nullable=True)
+    rent_price = Column(Float, nullable=True)
     comment = Column(Text, nullable=False)
     status = Column(Enum(PaymentStatusEnum), nullable=False)
     rent_status = Column(Enum(RentStatusEnum), nullable=False)
 
+    user = relationship("User", back_populates="rents")  # yangi relationship
     renter = relationship("Renter", back_populates="rents")
     product = relationship("Product", back_populates="rents")
 

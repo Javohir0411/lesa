@@ -5,7 +5,7 @@ from bot_strings.bot_command import BotCommands
 from utils.get_user_from_db import get_user_by_telegram_or_phone
 from keyboards.get_phone_number import get_phone_number_kb
 from bot_strings.start_command_strings import StartStrings
-from database.session import async_session_maker
+from database.session import async_session_maker, get_user_language
 from aiogram.fsm.context import FSMContext
 from aiogram import Router, F, types
 from db.crud_user import create_user

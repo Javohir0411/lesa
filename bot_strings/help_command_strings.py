@@ -1,6 +1,7 @@
 from utils.enums import LanguageEnum
 from aiogram.utils import markdown
 
+
 class HelpStrings:
     TEXT = {
         LanguageEnum.uzl.name: (
@@ -9,7 +10,12 @@ class HelpStrings:
             "<b>Mavjud buyruqlar:</b>\n"
             "/start — Botni ishga tushirish\n"
             "/help — Yordam va qo‘llanma\n"
-            "/rent - Ijaraga berish jarayonini boshlash"
+            "/rent - Ijaraga berish jarayonini boshlash\n"
+            "/leased - Ijaraga berilganlarni ko'rish.\n"
+            "/total - Mahsulotlarni umumiy sonini ko'rish.\n"
+            "/return - Ijaraga berilganlarni qaytarib olish.\n"
+            "/settings - Sozlamalar.\n"
+            "/cancel - Jarayonni to'xtatish va botni oddiy xolatga o'tkazish\n"
         ),
 
         LanguageEnum.uzk.name: (
@@ -18,7 +24,12 @@ class HelpStrings:
             "<b>Мавжуд буйруқлар:</b>\n"
             "/start — Ботни ишга тушириш\n"
             "/help — Ёрдам ва қўлланма\n"
-            "/rent - Ижарага бериш жараёнини бошлаш"
+            "/rent - Ижарага бериш жараёнини бошлаш\n"
+            "/leased - Ижарага берилганларни кўриш.\n"
+            "/total - Маҳсулотларни умумий сонини кўриш.\n"
+            "/return - Ижарага берилганларни қайтариб олиш.\n"
+            "/settings - Созламалар.\n"
+            "/cancel - Жараённи тўхтатиш ва ботни оддий холатга ўтказиш\n"
         ),
 
         LanguageEnum.rus.name: (
@@ -27,6 +38,10 @@ class HelpStrings:
             "<b>Доступные команды:</b>\n"
             "/start — Запустить бота\n"
             "/help — Справка\n"
-            "/rent - Начать процесс аренды"
+            "/rent - Начать процесс аренды\n"
+            "/leased - Осмотр арендованных объектов недвижимости.\n"
+            "/return - Возврат арендованного имущества.\n"
+            "/settings - Настройки.\n"
+            "/cancel - Остановите процесс и верните бота в обычный режим.\n"
         ),
     }

@@ -1,10 +1,14 @@
+from aiogram.types import ReplyKeyboardRemove
+from sqlalchemy import select
+
 from database import session
+from db.models import User
 from keyboards.common_keyboards import build_select_keyboard
 from bot_strings.rent_command_strings import RentStrings
 from database.session import get_user_language, async_session_maker
 from aiogram.fsm.context import FSMContext
 from aiogram.filters import Command
-from aiogram import Router, types
+from aiogram import Router, types, F
 import logging
 from database.products.available_product import get_available_products
 
@@ -17,6 +21,13 @@ router = Router(name=__name__)
 
 @router.message(Command("rent", prefix="/!"))
 async def handle_command_rent(message: types.Message, state: FSMContext):
+    async with async_session_maker() as session:
+        result = await session.execute(
+            select(User).where(User.telegram_id == message.from_user.id)
+        )
+        current_user = result.scalar_one_or_none()
+        await state.update_data(user_id=current_user.id)
+
     logging.info("HANDLE COMMAND RENT ISHGA TUSHDI")
 
     lang = await get_user_language(message)
@@ -49,4 +60,23 @@ async def handle_command_rent(message: types.Message, state: FSMContext):
     await message.answer(
         text=message_text,
         reply_markup=build_select_keyboard(ProductTypeEnum),
+    )
+
+
+@router.message(Command("cancel"), RentStatus())
+@router.message(Command("cancel"))
+@router.message(F.text.casefold() == "cancel", RentStatus())
+@router.message(F.text.casefold() == "cancel")
+async def cancel_handle(message: types.Message, state: FSMContext) -> None:
+    state_current = await state.get_state()
+    if state_current is None:
+        await message.answer(
+            text=f"ОК, лекин ҳеч нарсани бошламаган эдик ҳали. Ижарани бошлаш: /rent",
+            reply_markup=types.ReplyKeyboardRemove()
+        )
+        return
+    await state.clear()
+    await message.answer(
+        text=f"Жараён <b><u>{state_current.split(':')[-1]}</u></b> қадамида тўхтатилди, Қайта бошлаш учун: /rent",
+        reply_markup=types.ReplyKeyboardRemove()
     )

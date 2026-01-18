@@ -66,7 +66,7 @@ async def handle_notes_for_renter(message: types.Message, state: FSMContext):
     # 3️⃣ Bazaga saqlash
     try:
         async with async_session_maker() as session:
-            await save_rent_from_fsm(data)  # Bu funksiya Renter va Rentlarni saqlaydi
+            rents = await save_rent_from_fsm(data)  # Bu funksiya Renter va Rentlarni saqlaydi
     except Exception as e:
         logging.error(f"Rents saqlashda xatolik: {e}")
         error_msg = {
@@ -77,14 +77,31 @@ async def handle_notes_for_renter(message: types.Message, state: FSMContext):
         await message.answer(text=error_msg.get(lang, "Xatolik ❌"))
         return
 
+    # 4️⃣ Foydalanuvchiga batafsil xabar tayyorlash
+    message_lines = []
+    for rent in rents:
+        product_name = f"{rent.product.product_type}"
+        if rent.product.product_size:
+            product_name += f" ({rent.product.product_size})"
+        days = (rent.end_date.date() - rent.start_date.date()).days
+        line = f"<b>{product_name}</b> — <u>{rent.quantity}</u> дона\n"
+        line += f"<b>Ижара кунлари:</b> <u>{days}</u>\n"
+        line += f"<b>Маҳсулот нархи:</b> <u>{rent.product_price}</u> сўм\n"
+        line += f"<b>Етказиб бериш хизмати:</b> <u>{rent.delivery_price}</u> сўм\n"
+        line += f"<b>Жами:</b> <u>{rent.rent_price}</u> сўм\n"
+        message_lines.append(line)
+
     # 4️⃣ Foydalanuvchiga xabar
-    rent_result = {
+    header = {
         "uzl": "Ijara ma'lumotlari saqlandi!✅",
         "uzk": "Ижара маълумотлари сақланди!✅",
         "rus": "Информация об аренде сохранена!✅"
-    }
+    }.get(lang, "Ижара маълумотлари сақланди!✅")
+
+    final_text = header + "\n\n" + "\n".join(message_lines)
+
     await message.answer(
-        text=rent_result.get(lang, "Ижара маълумотлари сақланди!✅"),
+        text=final_text,
         reply_markup=types.ReplyKeyboardRemove()
     )
 

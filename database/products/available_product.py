@@ -10,6 +10,29 @@ from utils.enums import RentStatusEnum
 logging.basicConfig(level=logging.INFO)
 
 
+async def get_available_products(session: AsyncSession):
+    products = await session.execute(select(Product))
+    products = products.scalars().all()
+
+    available_products = []
+    for product in products:
+        rented = await session.execute(
+            select(func.coalesce(func.sum(Rent.quantity), 0))
+            .where(Rent.product_id == product.id)
+            .where(Rent.rent_status == RentStatusEnum.active.value)
+        )
+        rented_quantity = rented.scalar() or 0
+
+        remaining_quantity = product.total_quantity - rented_quantity
+        logging.info(f"REMAINING QUANTITY: {remaining_quantity}")
+        if remaining_quantity > 0:
+            available_products.append((product, remaining_quantity))
+
+    return available_products
+
+
+
+
 # async def get_available_products(session):
 #     async with async_session_maker() as session:
 #         products = await session.execute(select(Product))  # Bazadan barcha Products-ni oldi
@@ -35,23 +58,3 @@ logging.basicConfig(level=logging.INFO)
 #
 #         logging.info(f"GET AVAILABLE PRODUCTS: {available_products}")
 #         return available_products
-
-async def get_available_products(session: AsyncSession):
-    products = await session.execute(select(Product))
-    products = products.scalars().all()
-
-    available_products = []
-    for product in products:
-        rented = await session.execute(
-            select(func.coalesce(func.sum(Rent.quantity), 0))
-            .where(Rent.product_id == product.id)
-            .where(Rent.rent_status == RentStatusEnum.active.value)
-        )
-        rented_quantity = rented.scalar() or 0
-
-        remaining_quantity = product.total_quantity - rented_quantity
-        logging.info(f"REMAINING QUANTITY: {remaining_quantity}")
-        if remaining_quantity > 0:
-            available_products.append((product, remaining_quantity))
-
-    return available_products

@@ -19,3 +19,9 @@ class RentStatus(StatesGroup):
     end_date = State()
     location_request = State()
     notes = State()
+
+class ReturnProduct(StatesGroup):
+    choosing_renter = State()
+    choosing_product = State()
+    entering_quantity = State()
+    confirming = State()

@@ -1,4 +1,7 @@
-from enum import StrEnum
+from enum import StrEnum, IntEnum, auto
+from sys import prefix
+
+from aiogram.filters.callback_data import CallbackData
 
 
 class LanguageEnum(StrEnum):
@@ -30,9 +33,25 @@ class PaymentStatusEnum(StrEnum):
     not_paid = "Тўланмаган ❌"
 
 
-# class LocationTypeEnum(StrEnum):
-#     map = "Харита",
-#     # text = "Матн"
+class SettingsActions(IntEnum):
+    language = auto()
+    renter = auto()
+    products = auto()
+    user_info = auto()
+
+
+class SettingsCB(CallbackData, prefix="settings"):
+    action: SettingsActions
+
+
+class StatusActions(IntEnum):
+    full_paid = auto()
+    part_paid = auto()
+    not_paid = auto()
+
+
+class StatusCB(CallbackData, prefix="status"):
+    action: StatusActions
 
 
 """

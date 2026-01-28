@@ -18,33 +18,36 @@ class RentStrings:
 
     CHOOSE_PRODUCT_KEYBOARD = {
         LanguageEnum.uzl.name: {
-            ProductTypeEnum.lesa.name: {
-                LesaSizeEnum.katta.name: "Lesa Katta",
-                LesaSizeEnum.orta.name: "Lesa O'rta",
-                LesaSizeEnum.kichik.name: "Lesa Kichik",
-            },
+            ProductTypeEnum.lesa.name:
+                "Lesa"
+                # LesaSizeEnum.katta.name: "Lesa Katta",
+                # LesaSizeEnum.orta.name: "Lesa O'rta",
+                # LesaSizeEnum.kichik.name: "Lesa Kichik",
+            ,
 
             ProductTypeEnum.monolit.name: "Monolit stoyka",
             ProductTypeEnum.taxta.name: "Taxta",
         },
 
         LanguageEnum.uzk.name: {
-            ProductTypeEnum.lesa.name: {
-                LesaSizeEnum.katta.name: "Леса Катта",
-                LesaSizeEnum.orta.name: "Леса Ўрта",
-                LesaSizeEnum.kichik.name: "Леса Кичик",
-            },
+            ProductTypeEnum.lesa.name:
+                "Леса"
+                # LesaSizeEnum.katta.name: "Леса Катта",
+                # LesaSizeEnum.orta.name: "Леса Ўрта",
+                # LesaSizeEnum.kichik.name: "Леса Кичик",
+            ,
 
             ProductTypeEnum.monolit.name: "Монолит стойка",
             ProductTypeEnum.taxta.name: "Тахта",
         },
 
         LanguageEnum.rus.name: {
-            ProductTypeEnum.lesa.name: {
-                LesaSizeEnum.katta.name: "Большая Леса",
-                LesaSizeEnum.orta.name: "Средняя Леса",
-                LesaSizeEnum.kichik.name: "Маленькая Леса",
-            },
+            ProductTypeEnum.lesa.name:
+                "Леса"
+                # LesaSizeEnum.katta.name: "Большая Леса",
+                # LesaSizeEnum.orta.name: "Средняя Леса",
+                # LesaSizeEnum.kichik.name: "Маленькая Леса",
+            ,
 
             ProductTypeEnum.monolit.name: "Монолитный стенд",
             ProductTypeEnum.taxta.name: "Доска",

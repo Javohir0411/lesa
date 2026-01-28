@@ -93,6 +93,7 @@ async def send_expired_rent_notification(bot: Bot):
                 "uzk": f"🕖 {rents_list[0].renter.renter_fullname} ижарага олган маҳсулотлар муддати бугун тугади \n\n",
                 "rus": f"🕖 {rents_list[0].renter.renter_fullname} срок действия арендованных продуктов истекает сегодня: \n\n",
             }
+            logging.info(f"SANA SANA: {rents_list[0].start_date}")
             # tilga mos label
 
             text = headers[lang]

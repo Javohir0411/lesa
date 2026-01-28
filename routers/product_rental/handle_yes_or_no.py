@@ -33,11 +33,11 @@ async def handle_additional_choice_ok(message: types.Message, state: FSMContext)
 
     text = RentStrings.CHOOSE_ANOTHER_PRODUCT[lang]
     for product, remaining_quantity in available_products:
-        if product.product_type.name == ProductTypeEnum.lesa.name:
-            size_name = product.product_size.name
-            product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][ProductTypeEnum.lesa.name][size_name]
-        else:
-            product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][product.product_type.name]
+        # if product.product_type.name == ProductTypeEnum.lesa.name:
+        #     size_name = product.product_size.name
+        #     product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][ProductTypeEnum.lesa.name][size_name]
+        # else:
+        product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][product.product_type.name]
 
         # real-time qoldiqni chiqaramiz
         if lang == "uzl":

@@ -20,8 +20,14 @@ class RentStatus(StatesGroup):
     location_request = State()
     notes = State()
 
+
 class ReturnProduct(StatesGroup):
     choosing_renter = State()
     choosing_product = State()
     entering_quantity = State()
     confirming = State()
+
+
+class ReportState(StatesGroup):
+    get_start_end_dates= State()
+    send_report = State()

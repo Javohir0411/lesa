@@ -73,13 +73,13 @@ async def handle_location_request(message: types.Message, state: FSMContext):
 
     if lang == "uzl":
         text = ("Mijoz haqida, qo'shimcha, o'zingiz uchun biror-bir izoh/eslatma yozib qo'yasizmi? ⬇️\n"
-                "Agar xoxlamasangiz Skip deb yozib yuboring")
+                "Agar xoxlamasangiz <b>Skip</b> deb yozib yuboring")
     elif lang == "uzk":
         text = ("Мижоз ҳақида, қўшимча, ўзингиз учун бирор-бир изоҳ/еслатма ёзиб қўясизми? ⬇️\n"
-                "Агар хохламасангиз Skip деб ёзиб юборинг")
+                "Агар хохламасангиз <b>Skip</b> деб ёзиб юборинг")
     elif lang == "rus":
         text = ("Хотели бы вы записать для себя дополнительные комментарии/заметки о клиенте? ⬇️\n"
-                "Если вам это не нужно, просто скажите Skip.")
+                "Если вам это не нужно, просто скажите <b>Skip</b>.")
     await state.set_state(RentStatus.notes)
     await message.answer(
         text=text,

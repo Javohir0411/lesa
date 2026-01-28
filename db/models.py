@@ -64,8 +64,8 @@ class Rent(Base):
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
 
     quantity = Column(Integer, nullable=False)
-    start_date = Column(DateTime(timezone=True), nullable=False)
-    end_date = Column(DateTime(timezone=True), nullable=False)
+    start_date = Column(Date, nullable=False)
+    end_date = Column(Date, nullable=False)
 
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)

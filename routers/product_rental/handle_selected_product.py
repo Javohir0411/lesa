@@ -36,25 +36,27 @@ async def handle_selected_product(message: types.Message, state: FSMContext):
 
     quantity_string = RentStrings.INSERT_QUANTITY_PRODUCT[lang]
 
-    if selected_product == ProductTypeEnum.lesa.value:
-        await state.set_state(RentStatus.lesa_size_choice)
-        if lang == "uzl":
-            size = "Iltimos, lesa uchun o'lcham kiriting:"
-        elif lang == "uzk":
-            size = "Илтимос, леса учун ўлчам киритинг:"
-        elif lang == "rus":
-            size = "Пожалуйста, укажите размер лесы:"
+    # if selected_product == ProductTypeEnum.lesa.value:
+    #     await state.set_state(RentStatus.lesa_size_choice)
+    #     if lang == "uzl":
+    #         size = "Iltimos, lesa uchun o'lcham kiriting:"
+    #     elif lang == "uzk":
+    #         size = "Илтимос, леса учун ўлчам киритинг:"
+    #     elif lang == "rus":
+    #         size = "Пожалуйста, укажите размер лесы:"
+    #
+    #     await message.answer(
+    #         text=size,
+    #         reply_markup=build_lesa_keyboard(lang)
+    #     )
 
-        await message.answer(
-            text=size,
-            reply_markup=build_lesa_keyboard(lang)
-        )
 
-
-    else:
+    # else:
         # Monolit yoki Taxta → miqdor kiritish
-        await state.set_state(RentStatus.quantity)
-        await message.answer(
-            text=quantity_string,
-            reply_markup=ReplyKeyboardRemove()
-        )
+    await state.set_state(RentStatus.quantity)
+    await message.answer(
+        text=quantity_string,
+        reply_markup=ReplyKeyboardRemove()
+    )
+
+# Lesa-ni hozircha faqat bitta hajmi mavjud ekan, yangilari qo'shilganida o'lcham ham kiritiladi

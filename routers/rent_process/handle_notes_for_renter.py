@@ -83,7 +83,7 @@ async def handle_notes_for_renter(message: types.Message, state: FSMContext):
         product_name = f"{rent.product.product_type}"
         if rent.product.product_size:
             product_name += f" ({rent.product.product_size})"
-        days = (rent.end_date.date() - rent.start_date.date()).days
+        days = (rent.end_date - rent.start_date).days
         line = f"<b>{product_name}</b> — <u>{rent.quantity}</u> дона\n"
         line += f"<b>Ижара кунлари:</b> <u>{days}</u>\n"
         line += f"<b>Маҳсулот нархи:</b> <u>{rent.product_price}</u> сўм\n"

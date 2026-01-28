@@ -2,6 +2,7 @@ from aiogram import Router, types
 from aiogram.filters import Command
 
 from database.session import get_user_language
+from utils.admin_only import AdminOnly
 from utils.get_total_product import get_total_product
 
 router = Router(name=__name__)
@@ -13,7 +14,7 @@ PRODUCT_TYPE_TRANSLATIONS = {
 }
 
 
-@router.message(Command("total", prefix="/!"))
+@router.message(AdminOnly(), Command("total", prefix="/!"))
 async def handle_total_command(message: types.Message):
     lang = await get_user_language(message)
     totals = await get_total_product()
@@ -38,3 +39,14 @@ async def handle_total_command(message: types.Message):
         text += f"<b>{type_text}</b>{size_text}:  <u>{total_quantity}</u>\n"
 
     await message.answer(text)
+
+@router.message(Command("total", prefix="/!"))
+async def handle_total_command_not_admin(message: types.Message):
+    lang = await get_user_language(message)
+    await message.answer(
+        {
+            "uzl": "Sizga ruxsat yo'q ❌\nMa'lumotlar faqat admin uchun",
+            "uzk": "Сизга рухсат йўқ ❌\nМаълумотлар фақат админ учун",
+            "rus": "Вам запрещено ❌\nИнформация только для администратора.",
+        }.get(lang, "Сизга рухсат йўқ ❌\nМаълумотлар фақат админ учун")
+    )

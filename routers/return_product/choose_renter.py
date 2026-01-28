@@ -51,10 +51,11 @@ async def handle_choosing_renter(message: types.Message, state: FSMContext):
         items = []
         for r in active_rents:
             p = r.product
-            if p.product_type == ProductTypeEnum.lesa:
-                items.append(f"{p.product_type.value} | {p.product_size.value} ({r.quantity})")
-            else:
-                items.append(f"{p.product_type.value} ({r.quantity})")
+            # if p.product_type == ProductTypeEnum.lesa:
+            #     items.append(f"{p.product_type.value} | {p.product_size.value} ({r.quantity})")
+            # else:
+            # Lesa-ni hozircha bitta hajmi bor
+            items.append(f"{p.product_type.value} ({r.quantity})")
 
         kb = build_select_keyboard(items)
 

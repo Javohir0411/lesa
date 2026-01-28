@@ -13,13 +13,14 @@ import logging
 from database.products.available_product import get_available_products
 
 from states import RentStatus
+from utils.admin_only import AdminOnly
 from utils.enums import ProductTypeEnum
 
 logging.basicConfig(level=logging.DEBUG)
 router = Router(name=__name__)
 
 
-@router.message(Command("rent", prefix="/!"))
+@router.message(AdminOnly(), Command("rent", prefix="/!"))
 async def handle_command_rent(message: types.Message, state: FSMContext):
     async with async_session_maker() as session:
         result = await session.execute(
@@ -38,19 +39,20 @@ async def handle_command_rent(message: types.Message, state: FSMContext):
 
     message_text = RentStrings.RENT_STARTING_PROCESS[lang]
     for product, remaining_quantity in available_products:
-        if product.product_type.name == ProductTypeEnum.lesa.name:
-            size_name = product.product_size.name
-            product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][ProductTypeEnum.lesa.name][size_name]
-        else:
-            product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][product.product_type.name]
+        # if product.product_type.name == ProductTypeEnum.lesa.name:
+        #     size_name = product.product_size.name
+        #     product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][ProductTypeEnum.lesa.name][size_name]
+        # lesani yangi o'lchami qo'shilsa, ishga tushiramiz
+        # else:
+        product_name = RentStrings.CHOOSE_PRODUCT_KEYBOARD[lang][product.product_type.name]
 
         # real-time qoldiqni chiqaramiz
         if lang == "uzl":
             message_text += f"<b>{product_name}</b> - Qoldiq: {remaining_quantity}\n"
         elif lang == "uzk":
-            message_text += f"{product_name} - Қолдиқ: {remaining_quantity}\n"
+            message_text += f"<b>{product_name}</b> - Қолдиқ: {remaining_quantity}\n"
         elif lang == "rus":
-            message_text += f"{product_name} - Остаток: {remaining_quantity}\n"
+            message_text += f"<b>{product_name}</b> - Остаток: {remaining_quantity}\n"
 
     logging.info(f"MESSAGE TEXT: {message_text}")
     #
@@ -60,6 +62,17 @@ async def handle_command_rent(message: types.Message, state: FSMContext):
     await message.answer(
         text=message_text,
         reply_markup=build_select_keyboard(ProductTypeEnum),
+    )
+
+@router.message(Command("rent", prefix="/!"))
+async def handle_command_rent_not_admin(message: types.Message):
+    lang = await get_user_language(message)
+    await message.answer(
+        {
+            "uzl": "Sizga ruxsat yo'q ❌\nMa'lumotlar faqat admin uchun",
+            "uzk": "Сизга рухсат йўқ ❌\nМаълумотлар фақат админ учун",
+            "rus": "Вам запрещено ❌\nИнформация только для администратора.",
+        }.get(lang, "Сизга рухсат йўқ ❌\nМаълумотлар фақат админ учун")
     )
 
 

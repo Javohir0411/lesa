@@ -11,8 +11,8 @@ async def add_products():
             Product(
                 product_type=ProductTypeEnum.lesa,
                 product_size=LesaSizeEnum.katta,
-                total_quantity=50,
-                price_per_day=30000
+                total_quantity=273,
+                price_per_day=3000
             ),
             Product(
                 product_type=ProductTypeEnum.lesa,
@@ -31,14 +31,14 @@ async def add_products():
             Product(
                 product_type=ProductTypeEnum.monolit,
                 product_size=None,
-                total_quantity=50,
-                price_per_day=15000
+                total_quantity=20,
+                price_per_day=5000
             ),
             Product(
                 product_type=ProductTypeEnum.taxta,
                 product_size=None,
-                total_quantity=70,
-                price_per_day=30000
+                total_quantity=300,
+                price_per_day=1500
             ),
         ]
 

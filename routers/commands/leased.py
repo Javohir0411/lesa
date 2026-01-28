@@ -62,6 +62,7 @@ from aiogram.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from bot_strings.leased_command_strings import Leased
 from database.session import get_user_language
+from utils.admin_only import AdminOnly
 from utils.enums import RentStatusEnum
 from utils.get_leased_rent import get_leased_rents
 
@@ -121,7 +122,7 @@ def format_rent_text(rents_slice, lang: str) -> str:
     return text
 
 
-@router.message(Command("leased", prefix="/!"))
+@router.message(AdminOnly(), Command("leased", prefix="/!"))
 async def handle_leased_command(message: types.Message):
     rents = await get_leased_rents()
     lang = await get_user_language(message)
@@ -148,8 +149,18 @@ async def handle_leased_command(message: types.Message):
 
     await message.answer(text=text, reply_markup=kb, parse_mode="HTML")
 
+@router.message(Command("leased", prefix="/!"))
+async def handle_leased_command_not_admin(message: types.Message):
+    lang = await get_user_language(message)
+    await message.answer(
+        {
+            "uzl": "Sizga ruxsat yo'q ❌\nMa'lumotlar faqat admin uchun",
+            "uzk": "Сизга рухсат йўқ ❌\nМаълумотлар фақат админ учун",
+            "rus": "Вам запрещено ❌\nИнформация только для администратора.",
+        }.get(lang, "Сизга рухсат йўқ ❌\nМаълумотлар фақат админ учун")
+    )
 
-@router.callback_query(lambda c: c.data.startswith("leased_page:"))
+@router.callback_query(lambda c: c.data.startswith("leased_page:"), AdminOnly())
 async def handle_leased_pagination(callback: CallbackQuery):
     rents = await get_leased_rents()
     lang = await get_user_language(callback.message)
@@ -163,10 +174,21 @@ async def handle_leased_pagination(callback: CallbackQuery):
         "uzl": "📦 Ijaraga berilgan mahsulotlar:\n\n",
         "uzk": "📦 Ижарага берилган маҳсулотлар:\n\n",
         "rus": "📦 Продукты в аренду:\n\n"
-    }.get(lang, "📦 Ijaraga berilgan mahsulotlar:\n\n")
+    }.get(lang, "📦 Ижарага берилган маҳсулотлар:\n\n")
 
     text = header + format_rent_text(rents_slice, lang)
     kb = build_pagination_keyboard(total_items=len(rents), current_page=page)
 
     await callback.message.edit_text(text=text, reply_markup=kb, parse_mode="HTML")
     await callback.answer()
+
+@router.callback_query(lambda c: c.data.startswith("leased_page:"), AdminOnly())
+async def handle_leased_pagination_not_admin(callback: CallbackQuery):
+    lang = await get_user_language(callback.message)
+    await message.answer(
+        {
+            "uzl": "Sizga ruxsat yo'q ❌\nMa'lumotlar faqat admin uchun",
+            "uzk": "Сизга рухсат йўқ ❌\nМаълумотлар фақат админ учун",
+            "rus": "Вам запрещено ❌\nИнформация только для администратора.",
+        }.get(lang, "Сизга рухсат йўқ ❌\nМаълумотлар фақат админ учун")
+    )
